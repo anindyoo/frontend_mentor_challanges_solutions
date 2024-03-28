@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+$outfit_regular: 'Outfit', sans-serif;
+$white: hsl(0, 0%, 100%);
+$light_gray: hsl(212, 45%, 89%);
+$grayish_blue: hsl(220, 15%, 55%);
+$dark_blue: hsl(218, 44%, 22%);
+
+@function rem($value) {
+  @return ($value / 16px) * 1rem;
+}
+
+body {
+  font-family: $outfit_regular;
+  background-color: $light_gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+
+  .barcode-card {
+    $card_padding: rem(16px);
+
+    max-width: rem(320px);
+    padding: $card_padding;
+    background-color: $white;
+    text-align: center;
+    border-radius: rem(20px);
+    box-sizing: border-box;
+    box-shadow: 0px 25px 25px 0px hsla(0, 0%, 0%, 0.0477);
+
+    img, .barcode-card-text {
+      max-width: 100%;
+    }
+
+    h1 {
+      color: $dark_blue;
+      font-size: rem(22px);
+    }
+
+    p {
+      font-size: rem(15px);
+      color: $grayish_blue;
+      padding: 0 1rem;
+    }
+  }
+
+  .attribution {
+    color: $grayish_blue;
+    margin-top: rem(24px);
+  }
+}
