@@ -9,4 +9,4 @@ So far, the technologies used in this projects are:
 ## Completed Projects List
 This list showcases all completed projects, ordered chronologically from earliest to latest.
 ### 1. **QR Code Component**
-[Detail](https://www.frontendmentor.io/challenges/qr-code-component-iux_sIO_H) | [Code](https://github.com/anindyoo/frontend_mentor_challanges_solutions/tree/main/1-qr-code-component-challenge) | [Solution](https://anindyoo.github.io/frontend_mentor_challanges_solutions/1-qr-code-component-challenge/)
+[Detail](https://www.frontendmentor.io/challenges/qr-code-component-iux_sIO_H) | [Code](https://github.com/anindyoo/frontend_mentor_challanges_solutions/tree/main/1-qr-code-component-challenge) | [Live Solution](https://anindyoo.github.io/frontend_mentor_challanges_solutions/1-qr-code-component-challenge/)
