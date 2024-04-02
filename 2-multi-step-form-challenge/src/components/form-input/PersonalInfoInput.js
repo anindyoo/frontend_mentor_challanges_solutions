@@ -41,7 +41,6 @@ export default function PersonalInfoInput(props) {
         [eventName]: eventValue,
       }
     });
-    
 
     const formatValidation = (name, value) => {
       switch(name) {
