@@ -1,0 +1,8 @@
+@use'./variables.scss' as *;
+@tailwind base;
+@tailwind components;
+* {
+  font-family: $primary_font;
+}
+
+@tailwind utilities;
