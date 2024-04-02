@@ -1,9 +1,14 @@
-import './App.css';
+import './styles/global.scss';
+import FormContext from './components/form-context/FormContext';
+import colors from './utils/colors';
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <main 
+      className='flex justify-center items-center min-h-screen min-w-screen'
+      style={{ backgroundColor: `${colors.magnolia}` }}>
+      <FormContext />
+    </main>
   );
 }
 
