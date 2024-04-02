@@ -34,7 +34,6 @@ export default function PersonalInfoInput(props) {
     let eventName = event.target.name;
     let eventValue = event.target.value;
     
-    
     setPersonalInfoData(previousValue => {
       return {
         ...previousValue,
