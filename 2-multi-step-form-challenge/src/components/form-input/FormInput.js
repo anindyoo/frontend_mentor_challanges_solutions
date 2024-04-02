@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { StepContext } from '../form-context/FormContext';
 import PersonalInfoInput from './PersonalInfoInput';
 import colors from '../../utils/colors';
+import PlanInput from './PlanInput';
 
 export default function FormInput() { 
   const stepFromContext = useContext(StepContext).step;
@@ -9,6 +10,8 @@ export default function FormInput() {
   
   const [personalInfoData, setPersonalInfoData] = useState({});
   const [inputsError, setInputsError] = useState({});
+  const [ planState, setPlanState ] = useState('arcade-monthly');
+  const [ checkedState, setCheckedState ] = useState(false)
   const [nextButtonIsClicked, setNextButtonIsClicked] = useState(false);
   
   
@@ -55,8 +58,7 @@ export default function FormInput() {
     },
   ];
 
-  const submitButtonClassName = `px-[1.625rem] py-3 bg-[red] text-[1rem]/[1em] rounded-md
-  px-[1.625rem] py-3 bg-[red] text-[1rem]/[1em] rounded-md`;
+  const submitButtonClassName = `px-[1.625rem] py-4 text-[1rem]/[1em] rounded-md`;
   const submitButtonStyle = { 
     backgroundColor: colors.marineBlue,
     color: colors.alabaster,
@@ -81,6 +83,13 @@ export default function FormInput() {
                 personalInfoData={personalInfoData}
                 setInputsError={setInputsError}
                 nextButtonIsClicked={nextButtonIsClicked}/>}
+              {stepFromContext === 1 && 
+              <PlanInput 
+                planState={planState}
+                setPlanState={setPlanState}
+                checkedState={checkedState}
+                setCheckedState={setCheckedState} />
+              }
             </section>
           )
         ))}
