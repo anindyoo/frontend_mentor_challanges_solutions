@@ -3,6 +3,8 @@ import { StepContext } from '../form-context/FormContext';
 import PersonalInfoInput from './PersonalInfoInput';
 import colors from '../../utils/colors';
 import PlanInput from './PlanInput';
+import AddOnsInput from './AddOnsInput';
+import { addOnData } from './AddOnsInput';
 
 export default function FormInput() { 
   const stepFromContext = useContext(StepContext).step;
@@ -10,8 +12,11 @@ export default function FormInput() {
   
   const [personalInfoData, setPersonalInfoData] = useState({});
   const [inputsError, setInputsError] = useState({});
-  const [ planState, setPlanState ] = useState('arcade-monthly');
-  const [ checkedState, setCheckedState ] = useState(false)
+  const [planState, setPlanState] = useState('arcade-monthly');
+  const [checkedState, setCheckedState] = useState(false);
+  const [addOnState, setAddOnState] = useState(
+    new Array(addOnData.length).fill(false)
+  );
   const [nextButtonIsClicked, setNextButtonIsClicked] = useState(false);
   
   
@@ -89,6 +94,12 @@ export default function FormInput() {
                 setPlanState={setPlanState}
                 checkedState={checkedState}
                 setCheckedState={setCheckedState} />
+              }
+              {stepFromContext === 2 && 
+              <AddOnsInput
+                addOnState={addOnState}
+                setAddOnState={setAddOnState} 
+                />
               }
             </section>
           )
