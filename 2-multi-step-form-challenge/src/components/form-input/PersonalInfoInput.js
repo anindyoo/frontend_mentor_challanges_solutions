@@ -25,7 +25,7 @@ export const labelDetails = [
 export default function PersonalInfoInput(props) {
   const {nextButtonIsClicked} = props;
 
-  const globalInputContext = useContext(GlobalInputContext).globalInputState;
+  const personalInfoContext = useContext(GlobalInputContext).globalInputState.personalInfo;
   const setGlobalInputContext = useContext(GlobalInputContext).setglobalInputState;
 
   const handleInputChange = (event) => {
@@ -77,17 +77,17 @@ export default function PersonalInfoInput(props) {
             >{label.label}</label>
             <p 
               className="text-sm font-bold text-strawberryRed"
-            >{nextButtonIsClicked && globalInputContext.personalInfo.errors[label.id]}</p>
+            >{nextButtonIsClicked && personalInfoContext.errors[label.id]}</p>
           </div>          
           <input 
             type={label.type} 
             id={label.id} 
             name={label.id}
-            value={globalInputContext.personalInfo.inputs[label.id]}
+            value={personalInfoContext.inputs[label.id]}
             onChange={handleInputChange}
             placeholder={label.placeholder}
             className={`border w-full min-h-12 px-4 rounded-md font-medium text-marineBlue focus:outline-none border-lightGray ${
-              nextButtonIsClicked && globalInputContext.personalInfo.errors[label.id] ?  `border-strawberryRed` : `border-marineBlue`
+              nextButtonIsClicked && personalInfoContext.errors[label.id] ?  `border-strawberryRed` : `border-marineBlue`
             }`}
             required />
         </div>
