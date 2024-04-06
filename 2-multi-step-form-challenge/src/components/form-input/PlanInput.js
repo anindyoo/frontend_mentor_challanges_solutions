@@ -34,6 +34,19 @@ export const plansData = [
 export default function PlanInput() {
   const planContext = useContext(GlobalInputContext).globalInputState.plan;
   const setGlobalInputContext = useContext(GlobalInputContext).setglobalInputState;
+  
+  const handleRadioChange = (event) => {
+    const checkedPlan = plansData.filter((plan) => plan.name === event.target.value)[0];
+    console.log(checkedPlan)
+    setGlobalInputContext((prevInput) => ({
+      ...prevInput,
+      plan: {
+        ...prevInput.plan,
+        selectedPlan: event.target.value,
+        price: checkedPlan.price,
+      }
+    }));
+  };
 
   const handleYearlyToggleChange = () => {
     setGlobalInputContext((prevInput) => ({
@@ -42,16 +55,6 @@ export default function PlanInput() {
         ...prevInput.plan,
         selectedPlan: planContext.selectedPlan,
         yearlyToggle: !planContext.yearlyToggle,
-      }
-    }));
-  };
-
-  const handleRadioChange = (event) => {
-    setGlobalInputContext((prevInput) => ({
-      ...prevInput,
-      plan: {
-        ...prevInput.plan,
-        selectedPlan: event.target.value,
       }
     }));
   };
