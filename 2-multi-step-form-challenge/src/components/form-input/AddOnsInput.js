@@ -36,18 +36,27 @@ export default function AddOnsInput() {
   const planContext = useContext(GlobalInputContext).globalInputState.plan;
   const addOnsContext = useContext(GlobalInputContext).globalInputState.addOns;
   const setGlobalInputContext = useContext(GlobalInputContext).setglobalInputState;
- 
-  const handleCheckboxOnChange = (event) => {
-    let selectedAddOnId = event.target.value;
+
+  const filterAddOnContext = (id) => addOnsContext.filter((a) => a.id === id)[0];
+
+  const handleCheckboxChange = (event) => {
+    const checkboxValue = event.target.value;
+    const checkedAddOn = addOnData.filter((a) => a.id === checkboxValue);
+    let updatedAddOnsContext = [...addOnsContext];
+
+    if (event.target.checked) {
+      updatedAddOnsContext = [...addOnsContext, ...checkedAddOn];
+    } else {
+      updatedAddOnsContext.splice(addOnsContext.indexOf(checkedAddOn), 1);
+    }
 
     setGlobalInputContext((prevInput) => ({
       ...prevInput,
-      addOns:  {
-        ...prevInput.addOns, 
-        [selectedAddOnId]: !addOnsContext[selectedAddOnId],
-      } 
-    }));    
+      addOns: updatedAddOnsContext,
+    }));
   }
+
+  const isAddOnStateEqualId = (id) => filterAddOnContext(id) ? true : false;
 
   return (
     <section className="flex flex-col gap-4">    
@@ -56,17 +65,20 @@ export default function AddOnsInput() {
           htmlFor={addOn.id}
           key={`checkbox-` + index}
           className={`border flex items-center w-full justify-between px-6 py-5 rounded-md hover:cursor-pointer ${
-            (addOnsContext[addOn.id] ? `bg-alabaster border-purplishBlue` : `bg-white border-lightGray`)
-          }`}            
+              (addOnsContext[addOn.id] ? `bg-alabaster border-purplishBlue` : `bg-white border-lightGray`) 
+            }
+            ${isAddOnStateEqualId(addOn.id) && `bg-alabaster border-purplishBlue`}
+          `}
         >
           <div className="flex items-center">
             <input 
               type="checkbox" 
               id={addOn.id} 
               className="relative peer shrink-0 appearance-none w-5 h-5 border rounded mt-1 border-lightGray checked:bg-purplishBlue checked:border-0" 
-              checked={addOnsContext[addOn.id]}
+              checked={isAddOnStateEqualId(addOn.id)}
+              onChange={handleCheckboxChange}
               value={addOn.id}
-              onChange={handleCheckboxOnChange} 
+              // onChange={handleCheckboxOnChange} 
             />        
             <svg
               className="absolute h-3.5 w-3.5 mt-1.5 ml-1 hidden peer-checked:block"
