@@ -8,31 +8,32 @@ export const plansData = [
   {
     name: 'arcade',
     price: {
-      monthly: '9',
-      yearly: '90'
+      monthly: 9,
+      yearly: 90,
     },
     icon: iconArcade,      
   },
   {
     name: 'advanced',
     price: {
-      monthly: '12',
-      yearly: '120'
+      monthly: 12,
+      yearly: 120,
     },
     icon: iconAdvanced,      
   },
   {
     name: 'pro',
     price: {
-      monthly: '15',
-      yearly: '150'
+      monthly: 15,
+      yearly: 150,
     },
     icon: iconPro,      
   },
 ];
 
 export default function PlanInput() {
-  const planContext = useContext(GlobalInputContext).globalInputState.plan;
+  const globalInputContext = useContext(GlobalInputContext).globalInputState;
+  const planContext = globalInputContext.plan;
   const setGlobalInputContext = useContext(GlobalInputContext).setglobalInputState;
   
   const handleRadioChange = (event) => {
