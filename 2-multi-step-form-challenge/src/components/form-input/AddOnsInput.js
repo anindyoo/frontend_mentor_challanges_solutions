@@ -41,13 +41,15 @@ export default function AddOnsInput() {
 
   const handleCheckboxChange = (event) => {
     const checkboxValue = event.target.value;
-    const checkedAddOn = addOnData.filter((a) => a.id === checkboxValue);
+    const checkedAddOn = addOnData.filter((a) => a.id === checkboxValue)[0];
     let updatedAddOnsContext = [...addOnsContext];
 
     if (event.target.checked) {
-      updatedAddOnsContext = [...addOnsContext, ...checkedAddOn];
+      updatedAddOnsContext = [...addOnsContext, checkedAddOn];
     } else {
-      updatedAddOnsContext.splice(addOnsContext.indexOf(checkedAddOn), 1);
+      const convertToArrayOfId = (obj) => obj.map((a) => a.id);
+      const uncheckedIndex = convertToArrayOfId(addOnsContext).indexOf(checkedAddOn.id);
+      updatedAddOnsContext.splice(uncheckedIndex, 1)
     }
 
     setGlobalInputContext((prevInput) => ({
