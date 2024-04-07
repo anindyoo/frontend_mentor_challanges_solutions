@@ -12,7 +12,9 @@ module.exports = {
     colors: {
       // primary
       'marineBlue': '#02295a',
+      'lightMarineBlue': '#174a8b',
       'purplishBlue': '#473dff',
+      'lightPurplishBlue': '#938cfe',
       'pastelBlue': '#adbeff',
       'lightBlue': '#bfe2fd',
       'strawberryRed': '#ed3548',
