@@ -1,22 +1,15 @@
 import { useContext, useState } from 'react';
-import { StepContext } from '../form-context/FormContext';
+import { GlobalInputContext, StepContext } from '../form-context/FormContext';
 import PersonalInfoInput from './PersonalInfoInput';
-import colors from '../../utils/colors';
 import PlanInput from './PlanInput';
 import AddOnsInput from './AddOnsInput';
-import { addOnData } from './AddOnsInput';
+import SummaryInput from './SummaryInput';
 
 export default function FormInput() { 
   const stepFromContext = useContext(StepContext).step;
   const setStepFromContext = useContext(StepContext).setStep;
-  
-  const [personalInfoData, setPersonalInfoData] = useState({});
-  const [inputsError, setInputsError] = useState({});
-  const [planState, setPlanState] = useState('arcade-monthly');
-  const [checkedState, setCheckedState] = useState(false);
-  const [addOnState, setAddOnState] = useState(
-    new Array(addOnData.length).fill(false)
-  );
+  const globalInputContext = useContext(GlobalInputContext).globalInputState;
+
   const [nextButtonIsClicked, setNextButtonIsClicked] = useState(false);
   
   
@@ -25,19 +18,23 @@ export default function FormInput() {
     setNextButtonIsClicked(true);
     
     const isError = () => {
-      for (const key in personalInfoData) {
-        if (inputsError[key] !== '') return true;
+      for (const key in globalInputContext.personalInfo.errors) {
+        if (globalInputContext.personalInfo.errors[key] !== '') return true;
       }
       return false;
     }
     
-    if (!isError() && stepFromContext < 3) {
+    if (!isError() && stepFromContext < 4) {
       setStepFromContext(stepFromContext + 1);
     }
   }
   
   const handleBackClick = () => {
     setStepFromContext(stepFromContext - 1);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
   }
   
   const formDetails = [
@@ -63,60 +60,40 @@ export default function FormInput() {
     },
   ];
 
-  const submitButtonClassName = `px-[1.625rem] py-4 text-[1rem]/[1em] rounded-md`;
-  const submitButtonStyle = { 
-    backgroundColor: colors.marineBlue,
-    color: colors.alabaster,
-  }
-
   return (
-    <section className='min-w-[30.125rem] pt-10 px-4 mr-[4.25rem]'>
-      <section className='flex flex-col justify-between h-full'>
+    <form 
+      action="" 
+      onSubmit={handleSubmit} 
+      encType='multipart/form-data'
+      className='h-full'
+    >
+      <section className='flex flex-col justify-between h-full pt-10'>
         {formDetails.map((detail, index) => (
           stepFromContext === detail.number && (
             <section key={`form-detail-` + index}>
-              <h1 
-                className='text-[2rem]/[1em] font-bold mb-3'
-                style={{ color: colors.marineBlue }}>{detail.title}</h1>
-              <p 
-                className='text-[1rem]/[1em] mb-11'
-                style={{ color: colors.coolGray }}>{detail.description}</p>
-              {stepFromContext === 0 && 
-              <PersonalInfoInput 
-                setPersonalInfoData={setPersonalInfoData}
-                inputsError={inputsError}
-                personalInfoData={personalInfoData}
-                setInputsError={setInputsError}
-                nextButtonIsClicked={nextButtonIsClicked}/>}
-              {stepFromContext === 1 && 
-              <PlanInput 
-                planState={planState}
-                setPlanState={setPlanState}
-                checkedState={checkedState}
-                setCheckedState={setCheckedState} />
-              }
-              {stepFromContext === 2 && 
-              <AddOnsInput
-                addOnState={addOnState}
-                setAddOnState={setAddOnState} 
-                />
-              }
+              <h1 className='text-[2rem]/[1em] font-bold mb-3 text-marineBlue'>{detail.title}</h1>
+              <p className='text-[1rem]/[1em] mb-11 text-coolGray'>{detail.description}</p>
+              {stepFromContext === 0 && <PersonalInfoInput nextButtonIsClicked={nextButtonIsClicked} />}
+              {stepFromContext === 1 && <PlanInput />}
+              {stepFromContext === 2 && <AddOnsInput />}
+              {stepFromContext === 3 && <SummaryInput setStepFromContext={setStepFromContext} />}
             </section>
           )
         ))}
-        <section className='flex justify-between mb-4'>
+        <section className="flex justify-between mb-4">
           <button 
             type='button'
             onClick={handleBackClick}
-            className={`font-medium ${stepFromContext === 0 && 'collapse'}`}
-            style={{ color: colors.coolGray }}>Go Back</button>      
+            className={`font-medium text-coolGray ${stepFromContext === 0 && 'collapse'}`}>Go Back</button>      
             <button 
               type={stepFromContext === 3 ? 'submit' : 'button'}
-              onClick={stepFromContext === 3 ? null : handleNextStepClick}
-              className={submitButtonClassName}
-              style={submitButtonStyle}>{stepFromContext === 3 ? 'Confirm' : 'Next Step'}</button>
-        </section>              
+              onClick={stepFromContext === 4 ? null : handleNextStepClick}
+              className={`px-[1.625rem] py-4 text-[1rem]/[1em] rounded-md text-alabaster ${
+                stepFromContext < 3 ? `bg-marineBlue hover:bg-lightMarineBlue` : `bg-purplishBlue hover:bg-lightPurplishBlue`
+              }`}
+            >{stepFromContext === 3 ? 'Confirm' : 'Next Step'}</button>
+        </section> 
       </section>
-    </section>
+    </form>             
   );
 }
