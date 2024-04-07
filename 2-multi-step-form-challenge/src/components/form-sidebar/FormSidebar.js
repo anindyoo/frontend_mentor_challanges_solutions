@@ -1,4 +1,3 @@
-import colors from '../../utils/colors';
 import { useContext } from 'react';
 import { StepContext } from '../form-context/FormContext.js';
 
@@ -24,22 +23,22 @@ export default function FormSidebar() {
     },
   ];
 
+  const checkCurrentStep = (step) => stepFromContext === step;
+  
   return (
     <aside className="bg-bgSidebarDesktop min-h-[35.5rem] min-w-[17.125rem] px-8 py-10">
       {stepDetails.map((step, index) => (
         <div 
           key={`step-` + index} 
-          className={`sidebar-info flex mb-7`}
-          style={{ color: colors.alabaster }}
+          className="sidebar-info flex mb-7 text-alabaster"
         >
           <div 
-            className='border rounded-full w-8 h-8 text-center mr-4'
-            style={{ 
-              backgroundColor: stepFromContext === index ? colors.lightBlue : colors.purplishBlue,
-              borderColor: stepFromContext === index ? colors.lightBlue : colors.alabaster,
-              color: stepFromContext === index ? colors.marineBlue : colors.alabaster,
-            }}
-            >
+            className={` border rounded-full w-8 h-8 text-center mr-4 ${
+              step.number === 3 && stepFromContext === 4 ? `bg-lightBlue text-purplishBlue border-lightBlue`
+              : checkCurrentStep(index) ? `bg-lightBlue text-purplishBlue border-lightBlue` 
+              : 'bg-purplishBlue text-alabaster border-alabaster'
+            }`}
+          >
             <p className="text-[0.938rem] font-bold mt-1">{step.number + 1}</p>
           </div>
           <div className='flex justify-between flex-col'>
