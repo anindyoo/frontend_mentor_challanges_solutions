@@ -5,8 +5,7 @@ import colors from './utils/colors';
 function App() {
   return (
     <main 
-      className='flex justify-center items-center min-h-screen min-w-screen'
-      style={{ backgroundColor: `${colors.magnolia}` }}>
+      className='flex justify-center items-center min-h-screen min-w-screen bg-magnolia'>
       <FormContext />
     </main>
   );
