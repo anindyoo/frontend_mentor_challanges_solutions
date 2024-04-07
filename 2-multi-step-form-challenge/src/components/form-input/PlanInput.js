@@ -37,7 +37,6 @@ export default function PlanInput() {
   
   const handleRadioChange = (event) => {
     const checkedPlan = plansData.filter((plan) => plan.name === event.target.value)[0];
-    console.log(checkedPlan)
     setGlobalInputContext((prevInput) => ({
       ...prevInput,
       plan: {
