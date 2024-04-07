@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import colors from "../../utils/colors"
 import { GlobalInputContext } from "../form-context/FormContext";
 
 export const addOnData = [
@@ -80,14 +79,13 @@ export default function AddOnsInput() {
               checked={isAddOnStateEqualId(addOn.id)}
               onChange={handleCheckboxChange}
               value={addOn.id}
-              // onChange={handleCheckboxOnChange} 
             />        
             <svg
               className="absolute h-3.5 w-3.5 mt-1.5 ml-1 hidden peer-checked:block"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              fill={colors.white}
-              stroke={colors.white}
+              fill="#FFFFFF"
+              stroke="#FFFFFF"
               strokeWidth="1"
               strokeLinecap="round"
               strokeLinejoin="round"
