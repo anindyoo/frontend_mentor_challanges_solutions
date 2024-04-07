@@ -83,7 +83,7 @@ export default function PlanInput() {
             value={plan.name}
             onChange={handleRadioChange} 
             className="hidden" 
-            defaultChecked={index === 0 && true} />
+            defaultChecked={plan.name === planContext.selectedPlan && true} />
           <div>
             <p className="capitalize font-medium text-marineBlue">{plan.name}</p>
             <p className="text-sm text-coolGray">
