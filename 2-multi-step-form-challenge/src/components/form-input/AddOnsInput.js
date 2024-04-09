@@ -101,7 +101,7 @@ export default function AddOnsInput() {
             </div>
           </div>
           <p className="text-[0.938rem] text-purplishBlue">
-            ${planContext.yearlyToggle ? addOn.price.yearly : addOn.price.monthly}/mo
+            +${planContext.yearlyToggle ? addOn.price.yearly + '/yr' : addOn.price.monthly + '/mo'}
           </p>
         </label>
       ))}
