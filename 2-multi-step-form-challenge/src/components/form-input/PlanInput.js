@@ -62,15 +62,24 @@ export default function PlanInput() {
   const isPlanStateEqualName = (name) => planContext.selectedPlan === (name) || planContext.selectedPlan === (name) ? true : false;
 
   return (
-    <section className="flex flex-col gap-8">
-      <section className="flex justify-between">
+    <section className="flex flex-col gap-8 max-md:gap-6">
+      <section className="
+        flex justify-between
+        max-md:flex-col max-md:gap-3"
+      >
         {plansData.map((plan, index) => (
         <label 
           htmlFor={plan.name}
           key={'plan-' + index}
-          className={`border-2 pb-4 pt-5 px-4 min-w-[8.625rem] min-h-[10rem] flex flex-col justify-between rounded-md bg-white border-lightGray hover:cursor-pointer hover:bg-alabaster hover:border-purplishBlue ${
-            isPlanStateEqualName(plan.name) && `bg-alabaster border-purplishBlue`
-          }`}
+          className={`
+            border pb-4 pt-5 px-4 flex flex-col justify-between rounded-md border-lightGray
+            lg:min-w-[8.625rem] lg:min-h-[10rem] 
+            hover:cursor-pointer hover:bg-alabaster hover:border-purplishBlue 
+            max-md:p-4 max-md:flex-row max-md:justify-start max-md:gap-[0.875rem]
+            ${
+              isPlanStateEqualName(plan.name) && `bg-alabaster border-purplishBlue`
+            }`
+          }
         >
           <img 
             src={plan.icon} 
@@ -86,7 +95,7 @@ export default function PlanInput() {
             defaultChecked={plan.name === planContext.selectedPlan && true} />
           <div>
             <p className="capitalize font-medium text-marineBlue">{plan.name}</p>
-            <p className="text-sm text-coolGray">
+            <p className="text-sm text-coolGray max-md:mb-2">
               ${planContext.yearlyToggle ? `${plan.price.yearly}/yr` : `${plan.price.monthly}/mo`}
             </p>
             {planContext.yearlyToggle && (
@@ -97,7 +106,7 @@ export default function PlanInput() {
         ))}
       </section>
       <section className="flex justify-center bg-alabaster gap-6 text-sm py-4 font-medium">
-        <label className="flex justify-center gap-6 relative inline-flex cursor-pointer select-none items-center">
+        <label className="flex justify-center gap-6 relative cursor-pointer select-none items-center">
           <p className={!planContext.yearlyToggle ? `text-marineBlue` : `text-coolGray`}>Monthly</p>
           <input
             type='checkbox'
@@ -107,11 +116,19 @@ export default function PlanInput() {
             onChange={handleYearlyToggleChange}
             required
           />
-          <span className="slider mr-3 flex h-5 w-10 bg-marineBlue items-center rounded-full p-1 duration-200">
+          <span className="
+            slider mr-3 flex h-5 w-[2.625rem] bg-marineBlue items-center rounded-full p-1 duration-200
+            max-md:w-10"
+          >
             <span
-              className={`dot h-3.5 w-3.5 rounded-full bg-white duration-300 ${
-                planContext.yearlyToggle ? 'translate-x-[1.125rem]' : ''
-              }`}></span>
+              className={`
+                dot h-3.5 w-3.5 rounded-full bg-white duration-300 
+                max-md:h-3 max-md:w-3
+                ${
+                  planContext.yearlyToggle ? 'translate-x-5' : ''
+                }`
+              }
+            ></span>
           </span>    
           <p className={planContext.yearlyToggle ? `text-marineBlue` : `text-coolGray`}>Yearly</p>
         </label>

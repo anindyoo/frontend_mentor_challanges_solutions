@@ -65,7 +65,10 @@ export default function AddOnsInput() {
         <label 
           htmlFor={addOn.id}
           key={`checkbox-` + index}
-          className={`border flex items-center w-full justify-between px-6 py-5 rounded-md hover:cursor-pointer ${
+          className={`
+            border flex items-center w-full justify-between px-6 py-5 rounded-md hover:cursor-pointer 
+            max-md:px-4 max-md:py-3.5
+            ${
               (addOnsContext[addOn.id] ? `bg-alabaster border-purplishBlue` : `bg-white border-lightGray`) 
             }
             ${isAddOnStateEqualId(addOn.id) && `bg-alabaster border-purplishBlue`}
@@ -96,11 +99,11 @@ export default function AddOnsInput() {
               clipRule="evenodd"></path>
             </svg>
             <div className="ml-6">
-              <p className="font-medium text-marineBlue">{addOn.name}</p>
+              <p className="font-medium text-marineBlue max-md:text-sm">{addOn.name}</p>
              <p className="text-[0.938rem] text-coolGray">{addOn.description}</p>
             </div>
           </div>
-          <p className="text-[0.938rem] text-purplishBlue">
+          <p className="text-[0.938rem] text-purplishBlue max-md:text-xs">
             +${planContext.yearlyToggle ? addOn.price.yearly + '/yr' : addOn.price.monthly + '/mo'}
           </p>
         </label>

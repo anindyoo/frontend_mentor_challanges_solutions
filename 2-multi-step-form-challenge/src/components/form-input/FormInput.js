@@ -1,37 +1,16 @@
-import { useContext, useState } from 'react';
-import { GlobalInputContext, StepContext } from '../form-context/FormContext';
+import { useContext } from 'react';
+import { StepContext, useScreenSize } from '../form-context/FormContext';
 import PersonalInfoInput from './PersonalInfoInput';
 import PlanInput from './PlanInput';
 import AddOnsInput from './AddOnsInput';
 import SummaryInput from './SummaryInput';
+import FormStepButton from '../form-step-button/FormStepButton';
 
-export default function FormInput() { 
+export default function FormInput(props) { 
   const stepFromContext = useContext(StepContext).step;
   const setStepFromContext = useContext(StepContext).setStep;
-  const globalInputContext = useContext(GlobalInputContext).globalInputState;
 
-  const [nextButtonIsClicked, setNextButtonIsClicked] = useState(false);
-  
-  
-  const handleNextStepClick = (event) => {
-    event.preventDefault();
-    setNextButtonIsClicked(true);
-    
-    const isError = () => {
-      for (const key in globalInputContext.personalInfo.errors) {
-        if (globalInputContext.personalInfo.errors[key] !== '') return true;
-      }
-      return false;
-    }
-    
-    if (!isError() && stepFromContext < 4) {
-      setStepFromContext(stepFromContext + 1);
-    }
-  }
-  
-  const handleBackClick = () => {
-    setStepFromContext(stepFromContext - 1);
-  }
+  const { nextButtonIsClicked, setNextButtonIsClicked } = props;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -60,6 +39,8 @@ export default function FormInput() {
     },
   ];
 
+  const screenSize = useScreenSize();
+
   return (
     <form 
       action="" 
@@ -67,12 +48,16 @@ export default function FormInput() {
       encType='multipart/form-data'
       className='h-full'
     >
-      <section className='flex flex-col justify-between h-full pt-10'>
+      <section className='flex flex-col justify-between h-full lg:pt-10 max-md:p-0'>
         {formDetails.map((detail, index) => (
           stepFromContext === detail.number && (
             <section key={`form-detail-` + index}>
-              <h1 className='text-[2rem]/[1em] font-bold mb-3 text-marineBlue'>{detail.title}</h1>
-              <p className='text-[1rem]/[1em] mb-11 text-coolGray'>{detail.description}</p>
+              <h1 className='
+                font-bold mb-3 text-marineBlue 
+                lg:text-[2rem]/[1em]
+                max-md:m-0 max-md:text-2xl max-md:mb-[0.875rem]'
+              >{detail.title}</h1>
+              <p className='lg:text-[1rem]/[1em] mb-11 text-coolGray max-md:mb-6'>{detail.description}</p>
               {stepFromContext === 0 && <PersonalInfoInput nextButtonIsClicked={nextButtonIsClicked} />}
               {stepFromContext === 1 && <PlanInput />}
               {stepFromContext === 2 && <AddOnsInput />}
@@ -80,19 +65,8 @@ export default function FormInput() {
             </section>
           )
         ))}
-        <section className="flex justify-between mb-4">
-          <button 
-            type='button'
-            onClick={handleBackClick}
-            className={`font-medium text-coolGray ${stepFromContext === 0 && 'collapse'}`}>Go Back</button>      
-            <button 
-              type={stepFromContext === 3 ? 'submit' : 'button'}
-              onClick={stepFromContext === 4 ? null : handleNextStepClick}
-              className={`px-[1.625rem] py-4 text-[1rem]/[1em] rounded-md text-alabaster ${
-                stepFromContext < 3 ? `bg-marineBlue hover:bg-lightMarineBlue` : `bg-purplishBlue hover:bg-lightPurplishBlue`
-              }`}
-            >{stepFromContext === 3 ? 'Confirm' : 'Next Step'}</button>
-        </section> 
+        {screenSize.width > 1023 && <FormStepButton 
+          setNextButtonIsClicked={setNextButtonIsClicked} />}
       </section>
     </form>             
   );

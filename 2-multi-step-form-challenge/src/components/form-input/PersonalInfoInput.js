@@ -73,10 +73,10 @@ export default function PersonalInfoInput(props) {
           <div className="flex justify-between mb-1.5">
             <label 
               htmlFor={label.id}
-              className="text-sm font-regular text-marineBlue"
+              className="text-sm font-regular text-marineBlue max-md:text-xs"
             >{label.label}</label>
             <p 
-              className="text-sm font-bold text-strawberryRed"
+              className="text-sm font-bold text-strawberryRed max-md:text-xs"
             >{nextButtonIsClicked && personalInfoContext.errors[label.id]}</p>
           </div>          
           <input 
