@@ -76,7 +76,12 @@ export default function PersonalInfoInput(props) {
               className="text-sm font-regular text-marineBlue max-md:text-xs"
             >{label.label}</label>
             <p 
-              className="text-sm font-bold text-strawberryRed max-md:text-xs"
+              className={`
+                text-sm font-bold text-strawberryRed transition-all
+                max-md:text-xs
+                ${
+                  nextButtonIsClicked && personalInfoContext.errors[label.id] ? `visible opacity-100 duration-100 ease-in` : `opacity-0`
+                }`}
             >{nextButtonIsClicked && personalInfoContext.errors[label.id]}</p>
           </div>          
           <input 

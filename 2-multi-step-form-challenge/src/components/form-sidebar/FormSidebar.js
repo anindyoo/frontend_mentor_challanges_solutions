@@ -38,7 +38,7 @@ export default function FormSidebar() {
         >
           <div 
             className={`
-              border rounded-full w-8 h-8 text-center 
+              border rounded-full w-8 h-8 text-center transition duration-300 ease-in
               lg:mr-4 
               ${
                 step.number === 3 && stepFromContext === 4 ? `bg-lightBlue text-purplishBlue border-lightBlue`

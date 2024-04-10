@@ -66,10 +66,10 @@ export default function AddOnsInput() {
           htmlFor={addOn.id}
           key={`checkbox-` + index}
           className={`
-            border flex items-center w-full justify-between px-6 py-5 rounded-md hover:cursor-pointer 
+            border flex items-center w-full justify-between px-6 py-5 rounded-md hover:cursor-pointer transition-all
             max-md:px-4 max-md:py-3.5
             ${
-              (addOnsContext[addOn.id] ? `bg-alabaster border-purplishBlue` : `bg-white border-lightGray`) 
+              (addOnsContext[addOn.id] ? `bg-alabaster border-purplishBlue duration-100 ease-in-out` : `bg-white border-lightGray duration-300 ease-out`) 
             }
             ${isAddOnStateEqualId(addOn.id) && `bg-alabaster border-purplishBlue`}
           `}
@@ -78,7 +78,9 @@ export default function AddOnsInput() {
             <input 
               type="checkbox" 
               id={addOn.id} 
-              className="relative peer shrink-0 appearance-none w-5 h-5 border rounded mt-1 border-lightGray checked:bg-purplishBlue checked:border-0" 
+              className="
+                relative peer shrink-0 appearance-none w-5 h-5 border rounded mt-1 border-lightGray transition-all duration-100
+                checked:bg-purplishBlue checked:border-0 checked:ease-in-out" 
               checked={isAddOnStateEqualId(addOn.id)}
               onChange={handleCheckboxChange}
               value={addOn.id}

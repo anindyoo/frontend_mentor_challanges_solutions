@@ -38,17 +38,17 @@ export default function FormStepButton(props) {
         type='button'
         onClick={handleBackClick}
         className={`font-medium text-coolGray ${stepFromContext === 0 && 'collapse'}`}>Go Back</button>      
-        <button 
-          type={stepFromContext === 3 ? 'submit' : 'button'}
-          onClick={stepFromContext === 4 ? null : handleNextStepClick}
-          className={`
-            px-[1.625rem] py-4 text-[1rem]/[1em] rounded-md text-alabaster
-            max-md:py-3 max-md:px-4 max-md:text-sm
-            ${
-              stepFromContext < 3 ? `bg-marineBlue hover:bg-lightMarineBlue` : `bg-purplishBlue hover:bg-lightPurplishBlue`
-            }
-          `}
-        >{stepFromContext === 3 ? 'Confirm' : 'Next Step'}</button>
+      <button 
+        type={stepFromContext === 3 ? 'submit' : 'button'}
+        onClick={stepFromContext === 4 ? null : handleNextStepClick}
+        className={`
+          px-[1.625rem] py-4 text-[1rem]/[1em] rounded-md text-alabaster transition duration-200 ease-in
+          max-md:py-3 max-md:px-4 max-md:text-sm
+          ${
+            stepFromContext < 3 ? `bg-marineBlue hover:bg-lightMarineBlue` : `bg-purplishBlue hover:bg-lightPurplishBlue`
+          }
+        `}
+      >{stepFromContext === 3 ? 'Confirm' : 'Next Step'}</button>
     </section>  
   )
 }

@@ -98,16 +98,20 @@ export default function PlanInput() {
             <p className="text-sm text-coolGray max-md:mb-2">
               ${planContext.yearlyToggle ? `${plan.price.yearly}/yr` : `${plan.price.monthly}/mo`}
             </p>
-            {planContext.yearlyToggle && (
-              <p className="text-xs text-marineBlue">2 months free</p>
-            )}
+            <p className={`
+                transition-all text-xs text-marineBlue
+                ${
+                  planContext.yearlyToggle ? 'opacity-100 visible duration-500 ease-out' : 'opacity-0 absolute top-0 duration-0'
+                }`
+              }
+            >2 months free</p>
           </div>
         </label>
         ))}
       </section>
       <section className="flex justify-center bg-alabaster gap-6 text-sm py-4 font-medium">
         <label className="flex justify-center gap-6 relative cursor-pointer select-none items-center">
-          <p className={!planContext.yearlyToggle ? `text-marineBlue` : `text-coolGray`}>Monthly</p>
+          <p className={`transition duration-100 ease-in ${!planContext.yearlyToggle ? `text-marineBlue` : `text-coolGray`}`}>Monthly</p>
           <input
             type='checkbox'
             name='toggleDuration'
@@ -130,7 +134,7 @@ export default function PlanInput() {
               }
             ></span>
           </span>    
-          <p className={planContext.yearlyToggle ? `text-marineBlue` : `text-coolGray`}>Yearly</p>
+          <p className={`transition duration-100 ease-in ${planContext.yearlyToggle ? `text-marineBlue` : `text-coolGray`}`}>Yearly</p>
         </label>
       </section>
     </section>
